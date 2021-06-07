@@ -82,6 +82,35 @@
 			]
 		},
 		{
+			"begin": "^(\\s*)(script)((\\.$)|(?=[^\\n]*module.*\\.$))",
+			"beginCaptures": {
+				"2": {
+					"name": "entity.name.tag.pug"
+				}
+			},
+			"end": "^(?!(\\1\\s)|\\s*$)",
+			"name": "meta.tag.other",
+			"comment": "Script tag with JavaScript ESM code.",
+			"patterns": [{
+					"begin": "\\G(?=\\()",
+					"end": "$",
+					"patterns": [{
+						"include": "#tag_attributes"
+					}]
+				},
+				{
+					"begin": "\\G(?=[.#])",
+					"end": "$",
+					"patterns": [{
+						"include": "#complete_tag"
+					}]
+				},
+				{
+					"include": "source.js"
+				}
+			]
+		},
+		{
 			"begin": "^(\\s*)(style)((\\.$)|(?=[.#(].*\\.$))",
 			"beginCaptures": {
 				"2": {
